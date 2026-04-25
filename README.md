@@ -1,59 +1,64 @@
-# CafeOrders
+# Cafe Orders
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.1.
+Angular 21 приложение для управления заказами в небольшом кафе: меню, столы,
+активные заказы, скидки, разделение счета и история продаж.
 
-## Development server
+## Демо и доступ
 
-To start a local development server, run:
+- Login: `admin@cafe.local`
+- Password: `demo1234`
+- Заведение выбирается на экране входа.
+- Public URL: будет добавлен после подключения Vercel project к репозиторию.
 
-```bash
-ng serve
+## Стек
+
+- Angular 21, standalone components, lazy routes
+- Taiga UI 5
+- NgRx Signal Store
+- Mock API через `HttpClient` interceptors и seed-данные
+- localStorage для JWT-сессии, настроек и mock-состояния
+- Jest unit tests, Playwright e2e tests
+- ESLint, Prettier, Stylelint
+- GitHub Actions + Vercel config
+
+## Структура
+
+```text
+src/app/core       auth, guards, interceptors, API, state, models
+src/app/features   lazy-экраны login, shell, dashboard, menu, tables, history
+src/app/shared     переиспользуемые UI-компоненты
+docs               анализ, UX-концепция, прототип
+server             db.json для mock-server script
+e2e                Playwright сценарии
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Запуск
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Рекомендуемая версия Node: `22.x LTS`. Node 25 запускает CLI с предупреждением и в
+некоторых окружениях может нестабильно выполнять build.
 
 ```bash
-ng generate --help
+npm ci
+npm run start
 ```
 
-## Building
+Приложение откроется на `http://localhost:4200`.
 
-To build the project run:
+## Проверки
 
 ```bash
-ng build
+npm run lint
+npm run format:check
+npm test
+npm run build
+npm run e2e
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Mock-server artifact:
 
 ```bash
-ng test
+npm run mock:server
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Основное приложение работает через in-memory mock API interceptor на `/api/*`, поэтому
+отдельный сервер не нужен для локальной демонстрации.

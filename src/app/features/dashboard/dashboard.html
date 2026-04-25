@@ -10,10 +10,22 @@
   </header>
 
   <div class="metrics" aria-label="Показатели дня">
-    <app-metric-card label="Выручка" [value]="money(store.metrics().revenue)" appearance="success" />
-    <app-metric-card label="Средний чек" [value]="money(store.metrics().averageCheck)" appearance="primary" />
+    <app-metric-card
+      label="Выручка"
+      [value]="money(store.metrics().revenue)"
+      appearance="success"
+    />
+    <app-metric-card
+      label="Средний чек"
+      [value]="money(store.metrics().averageCheck)"
+      appearance="primary"
+    />
     <app-metric-card label="Активные" [value]="store.metrics().activeOrders" appearance="warning" />
-    <app-metric-card label="Выдано" [value]="store.metrics().servedOrders" hint="за выбранный день" />
+    <app-metric-card
+      label="Выдано"
+      [value]="store.metrics().servedOrders"
+      hint="за выбранный день"
+    />
   </div>
 
   <div class="workspace">
@@ -68,7 +80,13 @@
               <div class="line">
                 <span>{{ item.name }} x{{ item.quantity }}</span>
                 <strong>{{ money(itemSum(item)) }}</strong>
-                <button tuiButton type="button" size="xs" appearance="flat" (click)="removeDraftItem(item.menuItemId)">
+                <button
+                  tuiButton
+                  type="button"
+                  size="xs"
+                  appearance="flat"
+                  (click)="removeDraftItem(item.menuItemId)"
+                >
                   Удалить
                 </button>
               </div>
@@ -83,7 +101,9 @@
           </div>
         </div>
 
-        <button tuiButton type="submit" [disabled]="draftItems().length === 0">Создать заказ</button>
+        <button tuiButton type="submit" [disabled]="draftItems().length === 0">
+          Создать заказ
+        </button>
       </form>
     </section>
 
@@ -107,7 +127,9 @@
                 <strong>#{{ order.id }}</strong>
                 <p>{{ tableLabel(order.tableId) }} · {{ order.guestCount }} гостей</p>
               </div>
-              <span tuiBadge size="m" [attr.data-status]="order.status">{{ statusLabel(order.status) }}</span>
+              <span tuiBadge size="m" [attr.data-status]="order.status">{{
+                statusLabel(order.status)
+              }}</span>
             </div>
 
             <app-order-status-control

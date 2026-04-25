@@ -9,7 +9,9 @@ export function orderTotal(order: Pick<Order, 'items' | 'discountPercent'>): num
   return Math.round(subtotal * (1 - order.discountPercent / 100));
 }
 
-export function splitOrderTotal(order: Pick<Order, 'items' | 'discountPercent' | 'guestCount'>): number {
+export function splitOrderTotal(
+  order: Pick<Order, 'items' | 'discountPercent' | 'guestCount'>,
+): number {
   return order.guestCount > 0 ? Math.ceil(orderTotal(order) / order.guestCount) : orderTotal(order);
 }
 

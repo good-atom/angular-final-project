@@ -82,7 +82,9 @@ export const CafeStore = signalStore(
     activeOrders: computed(() =>
       store
         .orders()
-        .filter((order) => order.establishmentId === auth.establishmentId() && order.status !== 'served')
+        .filter(
+          (order) => order.establishmentId === auth.establishmentId() && order.status !== 'served',
+        )
         .sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
     ),
     dayOrders: computed(() =>

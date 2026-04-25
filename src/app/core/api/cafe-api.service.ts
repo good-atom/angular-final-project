@@ -17,7 +17,9 @@ export class CafeApiService {
   }
 
   updateOrderStatus(orderId: string, status: OrderStatus): Promise<CafeSnapshot> {
-    return firstValueFrom(this.http.patch<CafeSnapshot>(`/api/orders/${orderId}/status`, { status }));
+    return firstValueFrom(
+      this.http.patch<CafeSnapshot>(`/api/orders/${orderId}/status`, { status }),
+    );
   }
 
   updateOrderItems(orderId: string, items: Order['items']): Promise<CafeSnapshot> {

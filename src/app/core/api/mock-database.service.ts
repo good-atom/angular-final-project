@@ -13,14 +13,14 @@ export class MockDatabaseService {
 
     if (!value) {
       this.persist(initialCafeSnapshot);
-      return structuredClone(initialCafeSnapshot);
+      return cloneSnapshot(initialCafeSnapshot);
     }
 
     try {
       return JSON.parse(value) as CafeSnapshot;
     } catch {
       this.persist(initialCafeSnapshot);
-      return structuredClone(initialCafeSnapshot);
+      return cloneSnapshot(initialCafeSnapshot);
     }
   }
 
@@ -126,4 +126,8 @@ export class MockDatabaseService {
   private persist(snapshot: CafeSnapshot): void {
     localStorage.setItem(DB_KEY, JSON.stringify(snapshot));
   }
+}
+
+function cloneSnapshot(snapshot: CafeSnapshot): CafeSnapshot {
+  return JSON.parse(JSON.stringify(snapshot)) as CafeSnapshot;
 }

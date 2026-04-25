@@ -9,5 +9,4 @@ import { TuiRoot } from '@taiga-ui/core';
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App {
-}
+export class App {}

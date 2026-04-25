@@ -63,7 +63,10 @@ export class Menu {
   }
 
   protected categoryName(categoryId: string): string {
-    return this.store.categories().find((category) => category.id === categoryId)?.name ?? 'Без категории';
+    return (
+      this.store.categories().find((category) => category.id === categoryId)?.name ??
+      'Без категории'
+    );
   }
 
   protected money(value: number): string {

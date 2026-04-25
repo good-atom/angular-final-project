@@ -1,0 +1,17 @@
+{
+  "establishments": [
+    { "id": "cafe-center", "name": "Центральное кафе", "address": "ул. Тверская, 10" },
+    { "id": "cafe-park", "name": "Кафе у парка", "address": "Парк Горького, павильон 2" }
+  ],
+  "categories": [
+    { "id": "breakfast", "name": "Завтраки" },
+    { "id": "main", "name": "Основное" },
+    { "id": "drinks", "name": "Напитки" },
+    { "id": "desserts", "name": "Десерты" }
+  ],
+  "promoCodes": [
+    { "code": "LUNCH10", "discountPercent": 10 },
+    { "code": "STAFF20", "discountPercent": 20 },
+    { "code": "HAPPY5", "discountPercent": 5 }
+  ]
+}
