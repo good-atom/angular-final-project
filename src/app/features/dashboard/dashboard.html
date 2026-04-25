@@ -1,0 +1,147 @@
+<section class="page" aria-labelledby="dashboard-title">
+  <header>
+    <div>
+      <p class="eyebrow">Рабочая смена</p>
+      <h1 id="dashboard-title">Заказы кафе</h1>
+    </div>
+    @if (store.loading()) {
+      <tui-loader size="s" />
+    }
+  </header>
+
+  <div class="metrics" aria-label="Показатели дня">
+    <app-metric-card label="Выручка" [value]="money(store.metrics().revenue)" appearance="success" />
+    <app-metric-card label="Средний чек" [value]="money(store.metrics().averageCheck)" appearance="primary" />
+    <app-metric-card label="Активные" [value]="store.metrics().activeOrders" appearance="warning" />
+    <app-metric-card label="Выдано" [value]="store.metrics().servedOrders" hint="за выбранный день" />
+  </div>
+
+  <div class="workspace">
+    <section class="panel order-form" aria-labelledby="new-order-title">
+      <h2 id="new-order-title">Новый заказ</h2>
+
+      <form [formGroup]="form" (ngSubmit)="createOrder()">
+        <div class="form-grid">
+          <label class="field">
+            <span>Стол</span>
+            <select formControlName="tableId">
+              <option value="">С собой</option>
+              @for (table of store.currentTables(); track table.id) {
+                <option [value]="table.id">Стол {{ table.number }} - {{ table.seats }} мест</option>
+              }
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Гостей</span>
+            <input type="number" min="1" max="20" formControlName="guestCount" />
+          </label>
+
+          <label class="field">
+            <span>Промокод</span>
+            <input type="text" formControlName="promoCode" placeholder="LUNCH10" />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Поиск по меню</span>
+          <input
+            type="search"
+            [value]="store.menuSearch()"
+            (input)="store.setMenuSearch($any($event.target).value)"
+            placeholder="Капучино, паста, чизкейк"
+          />
+        </label>
+
+        <div class="menu-grid" aria-label="Позиции меню">
+          @for (item of store.currentMenuItems(); track item.id) {
+            <button tuiButton type="button" appearance="secondary" (click)="addItem(item)">
+              {{ item.name }} · {{ money(item.price) }}
+            </button>
+          }
+        </div>
+
+        <div class="draft">
+          <h3>Состав заказа</h3>
+          @if (draftItems().length) {
+            @for (item of draftItems(); track item.menuItemId) {
+              <div class="line">
+                <span>{{ item.name }} x{{ item.quantity }}</span>
+                <strong>{{ money(itemSum(item)) }}</strong>
+                <button tuiButton type="button" size="xs" appearance="flat" (click)="removeDraftItem(item.menuItemId)">
+                  Удалить
+                </button>
+              </div>
+            }
+          } @else {
+            <p class="empty">Добавьте позиции из меню</p>
+          }
+
+          <div class="total">
+            <span>Скидка {{ discountPercent() }}%</span>
+            <strong>{{ money(draftTotal()) }}</strong>
+          </div>
+        </div>
+
+        <button tuiButton type="submit" [disabled]="draftItems().length === 0">Создать заказ</button>
+      </form>
+    </section>
+
+    <section class="panel" aria-labelledby="active-orders-title">
+      <div class="panel-title">
+        <h2 id="active-orders-title">Активные заказы</h2>
+        <input
+          type="search"
+          [value]="store.orderSearch()"
+          (input)="store.setOrderSearch($any($event.target).value)"
+          placeholder="Поиск"
+          aria-label="Поиск заказов"
+        />
+      </div>
+
+      <div class="orders">
+        @for (order of store.activeOrders(); track order.id) {
+          <article class="order-card">
+            <div class="order-head">
+              <div>
+                <strong>#{{ order.id }}</strong>
+                <p>{{ tableLabel(order.tableId) }} · {{ order.guestCount }} гостей</p>
+              </div>
+              <span tuiBadge size="m" [attr.data-status]="order.status">{{ statusLabel(order.status) }}</span>
+            </div>
+
+            <app-order-status-control
+              [status]="order.status"
+              (statusChange)="updateStatus(order.id, $event)"
+            />
+
+            <div class="items">
+              @for (item of order.items; track item.menuItemId) {
+                <div class="line">
+                  <span>{{ item.name }} x{{ item.quantity }}</span>
+                  <strong>{{ money(itemSum(item)) }}</strong>
+                  <button
+                    tuiButton
+                    type="button"
+                    size="xs"
+                    appearance="flat"
+                    (click)="removeOrderItem(order, item.menuItemId)"
+                  >
+                    Удалить
+                  </button>
+                </div>
+              }
+            </div>
+
+            <footer>
+              <span>К оплате: {{ money(orderTotal(order)) }}</span>
+              <span>На гостя: {{ money(splitTotal(order)) }}</span>
+            </footer>
+          </article>
+        } @empty {
+          <p class="empty">Активных заказов нет</p>
+        }
+      </div>
+    </section>
+  </div>
+</section>

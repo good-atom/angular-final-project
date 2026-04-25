@@ -1,0 +1,67 @@
+import { CafeSnapshot } from '../models/cafe.models';
+
+export const initialCafeSnapshot: CafeSnapshot = {
+  establishments: [
+    { id: 'cafe-center', name: 'Центральное кафе', address: 'ул. Тверская, 10' },
+    { id: 'cafe-park', name: 'Кафе у парка', address: 'Парк Горького, павильон 2' },
+  ],
+  categories: [
+    { id: 'breakfast', name: 'Завтраки' },
+    { id: 'main', name: 'Основное' },
+    { id: 'drinks', name: 'Напитки' },
+    { id: 'desserts', name: 'Десерты' },
+  ],
+  menuItems: [
+    { id: 'm1', establishmentId: 'cafe-center', categoryId: 'breakfast', name: 'Сырники', price: 390, active: true },
+    { id: 'm2', establishmentId: 'cafe-center', categoryId: 'main', name: 'Паста с томатами', price: 520, active: true },
+    { id: 'm3', establishmentId: 'cafe-center', categoryId: 'main', name: 'Боул с курицей', price: 610, active: true },
+    { id: 'm4', establishmentId: 'cafe-center', categoryId: 'drinks', name: 'Капучино', price: 240, active: true },
+    { id: 'm5', establishmentId: 'cafe-center', categoryId: 'drinks', name: 'Домашний лимонад', price: 250, active: true },
+    { id: 'm6', establishmentId: 'cafe-center', categoryId: 'desserts', name: 'Чизкейк', price: 360, active: true },
+    { id: 'm7', establishmentId: 'cafe-park', categoryId: 'main', name: 'Сэндвич с индейкой', price: 430, active: true },
+    { id: 'm8', establishmentId: 'cafe-park', categoryId: 'drinks', name: 'Американо', price: 190, active: true },
+  ],
+  tables: [
+    { id: 't1', establishmentId: 'cafe-center', number: 1, seats: 2, occupied: false },
+    { id: 't2', establishmentId: 'cafe-center', number: 2, seats: 4, occupied: true },
+    { id: 't3', establishmentId: 'cafe-center', number: 3, seats: 4, occupied: false },
+    { id: 't4', establishmentId: 'cafe-center', number: 4, seats: 6, occupied: true },
+    { id: 't5', establishmentId: 'cafe-center', number: 5, seats: 2, occupied: false },
+    { id: 't6', establishmentId: 'cafe-park', number: 1, seats: 4, occupied: false },
+  ],
+  orders: [
+    {
+      id: '102',
+      establishmentId: 'cafe-center',
+      tableId: 't2',
+      guestCount: 2,
+      status: 'preparing',
+      items: [
+        { menuItemId: 'm2', name: 'Паста с томатами', price: 520, quantity: 2 },
+        { menuItemId: 'm4', name: 'Капучино', price: 240, quantity: 2 },
+      ],
+      discountPercent: 10,
+      promoCode: 'LUNCH10',
+      createdAt: new Date().toISOString(),
+    },
+    {
+      id: '103',
+      establishmentId: 'cafe-center',
+      tableId: 't4',
+      guestCount: 4,
+      status: 'ready',
+      items: [
+        { menuItemId: 'm3', name: 'Боул с курицей', price: 610, quantity: 1 },
+        { menuItemId: 'm5', name: 'Домашний лимонад', price: 250, quantity: 2 },
+      ],
+      discountPercent: 0,
+      promoCode: null,
+      createdAt: new Date().toISOString(),
+    },
+  ],
+  promoCodes: [
+    { code: 'LUNCH10', discountPercent: 10 },
+    { code: 'STAFF20', discountPercent: 20 },
+    { code: 'HAPPY5', discountPercent: 5 },
+  ],
+};

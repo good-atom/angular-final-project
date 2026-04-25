@@ -1,0 +1,7 @@
+<article class="metric" [attr.aria-label]="label">
+  <span tuiBadge size="s" [attr.data-tone]="appearance">{{ label }}</span>
+  <strong>{{ value }}</strong>
+  @if (hint) {
+    <small>{{ hint }}</small>
+  }
+</article>

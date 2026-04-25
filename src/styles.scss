@@ -1,1 +1,59 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  color-scheme: light;
+  font-family: 'Manrope', Arial, sans-serif;
+  background: #f6f7f9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: #f6f7f9;
+  color: #17212f;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field span {
+  color: #536070;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid #d7dde5;
+  border-radius: 8px;
+  padding: 0.65rem 0.8rem;
+  background: #ffffff;
+  color: #17212f;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: #2f80ed;
+  outline: 3px solid rgba(47, 128, 237, 0.15);
+}
+
+.error-text {
+  color: #b42318;
+  font-size: 0.85rem;
+  font-weight: 700;
+}

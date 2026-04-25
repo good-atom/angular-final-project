@@ -1,0 +1,60 @@
+<section class="page" aria-labelledby="history-title">
+  <header>
+    <div>
+      <p class="eyebrow">Продажи и популярность</p>
+      <h1 id="history-title">История дня</h1>
+    </div>
+
+    <div class="filters" aria-label="Фильтры истории">
+      <label>
+        <span>Дата</span>
+        <input
+          type="date"
+          [value]="store.selectedDay()"
+          (input)="store.setSelectedDay($any($event.target).value)"
+        />
+      </label>
+      <label>
+        <span>Статус</span>
+        <select
+          [value]="store.statusFilter()"
+          (change)="store.setStatusFilter($any($event.target).value)"
+        >
+          @for (status of statuses; track status.value) {
+            <option [value]="status.value">{{ status.label }}</option>
+          }
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <div class="layout">
+    <section class="panel" aria-label="История заказов">
+      @for (order of store.currentOrders(); track order.id) {
+        <article class="order">
+          <div>
+            <strong>#{{ order.id }}</strong>
+            <p>{{ order.createdAt | date: 'dd.MM.yyyy HH:mm' }}</p>
+          </div>
+          <span tuiBadge size="m" [attr.data-status]="order.status">{{ statusLabel(order.status) }}</span>
+          <strong>{{ total(order) }}</strong>
+        </article>
+      } @empty {
+        <p class="empty">Нет заказов по выбранным фильтрам</p>
+      }
+    </section>
+
+    <aside class="panel" aria-label="Популярные позиции">
+      <h2>Популярные позиции</h2>
+      @for (item of store.popularItems(); track item.name) {
+        <div class="popular">
+          <span>{{ item.name }}</span>
+          <strong>{{ item.quantity }} шт.</strong>
+          <small>{{ money(item.revenue) }}</small>
+        </div>
+      } @empty {
+        <p class="empty">Пока нет продаж за день</p>
+      }
+    </aside>
+  </div>
+</section>

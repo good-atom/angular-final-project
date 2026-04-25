@@ -1,0 +1,45 @@
+<main class="login-page">
+  <section class="login-panel" aria-labelledby="login-title">
+    <div>
+      <p class="eyebrow">Cafe Orders</p>
+      <h1 id="login-title">Вход в смену</h1>
+      <p class="lead">Авторизация разделяет данные между заведениями и открывает рабочую панель.</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <label class="field">
+        <span>Email</span>
+        <input type="email" formControlName="email" autocomplete="username" />
+        @if (form.controls.email.touched && form.controls.email.invalid) {
+          <small class="error-text">Введите корректный email</small>
+        }
+      </label>
+
+      <label class="field">
+        <span>Пароль</span>
+        <input type="password" formControlName="password" autocomplete="current-password" />
+      </label>
+
+      <label class="field">
+        <span>Заведение</span>
+        <select formControlName="establishmentId">
+          @for (establishment of establishments(); track establishment.id) {
+            <option [value]="establishment.id">{{ establishment.name }}</option>
+          }
+        </select>
+      </label>
+
+      @if (error()) {
+        <p class="error-text" role="alert">{{ error() }}</p>
+      }
+
+      <button tuiButton type="submit" [disabled]="loading()">
+        @if (loading()) {
+          <tui-loader size="s" />
+        } @else {
+          Войти
+        }
+      </button>
+    </form>
+  </section>
+</main>

@@ -1,0 +1,26 @@
+<div class="shell">
+  <aside class="sidebar" aria-label="Основная навигация">
+    <div>
+      <strong class="brand">Cafe Orders</strong>
+      <p>{{ auth.session()?.user?.name }}</p>
+    </div>
+
+    <nav>
+      @for (link of links; track link.path) {
+        <a [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
+      }
+    </nav>
+
+    <button tuiButton type="button" appearance="secondary" size="s" (click)="auth.logout()">
+      Выйти
+    </button>
+  </aside>
+
+  <main class="content">
+    @if (store.error()) {
+      <p class="global-error" role="alert">{{ store.error() }}</p>
+    }
+
+    <router-outlet />
+  </main>
+</div>

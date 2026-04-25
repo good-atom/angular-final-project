@@ -1,0 +1,74 @@
+<section class="page" aria-labelledby="menu-title">
+  <header>
+    <div>
+      <p class="eyebrow">Категории и цены</p>
+      <h1 id="menu-title">Меню</h1>
+    </div>
+    <label class="search">
+      <span>Поиск</span>
+      <input
+        type="search"
+        [value]="store.menuSearch()"
+        (input)="store.setMenuSearch($any($event.target).value)"
+      />
+    </label>
+  </header>
+
+  <div class="layout">
+    <form class="panel" [formGroup]="form" (ngSubmit)="save()" novalidate>
+      <h2>{{ editingId() ? 'Редактировать позицию' : 'Новая позиция' }}</h2>
+
+      <label class="field">
+        <span>Название</span>
+        <input type="text" formControlName="name" />
+        @if (form.controls.name.touched && form.controls.name.invalid) {
+          <small class="error-text">Минимум 2 символа</small>
+        }
+      </label>
+
+      <label class="field">
+        <span>Категория</span>
+        <select formControlName="categoryId">
+          @for (category of store.categories(); track category.id) {
+            <option [value]="category.id">{{ category.name }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Цена</span>
+        <input type="number" min="1" formControlName="price" />
+      </label>
+
+      <label class="check">
+        <input type="checkbox" formControlName="active" />
+        <span>Доступно для заказа</span>
+      </label>
+
+      <div class="actions">
+        <button tuiButton type="submit">{{ editingId() ? 'Сохранить' : 'Добавить' }}</button>
+        <button tuiButton type="button" appearance="secondary" (click)="cancel()">Сбросить</button>
+      </div>
+    </form>
+
+    <section class="panel list" aria-label="Позиции меню">
+      @for (item of store.currentMenuItems(); track item.id) {
+        <article class="menu-item">
+          <div>
+            <strong>{{ item.name }}</strong>
+            <p>{{ categoryName(item.categoryId) }}</p>
+          </div>
+          <span tuiBadge size="m">{{ money(item.price) }}</span>
+          <button tuiButton type="button" appearance="secondary" size="s" (click)="edit(item)">
+            Изменить
+          </button>
+          <button tuiButton type="button" appearance="flat" size="s" (click)="store.deleteMenuItem(item.id)">
+            Удалить
+          </button>
+        </article>
+      } @empty {
+        <p class="empty">Позиции не найдены</p>
+      }
+    </section>
+  </div>
+</section>

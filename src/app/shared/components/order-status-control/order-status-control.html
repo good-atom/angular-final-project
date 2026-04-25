@@ -1,0 +1,8 @@
+<label class="status-control">
+  <span>Статус</span>
+  <select [value]="status" (change)="update($any($event.target).value)" aria-label="Статус заказа">
+    @for (item of statuses; track item.value) {
+      <option [value]="item.value">{{ item.label }}</option>
+    }
+  </select>
+</label>

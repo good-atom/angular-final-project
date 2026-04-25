@@ -1,0 +1,23 @@
+<section class="page" aria-labelledby="tables-title">
+  <header>
+    <p class="eyebrow">Посадка гостей</p>
+    <h1 id="tables-title">Столы</h1>
+  </header>
+
+  <div class="grid">
+    @for (table of store.currentTables(); track table.id) {
+      <article class="table-card">
+        <div>
+          <strong>Стол {{ table.number }}</strong>
+          <p>{{ table.seats }} мест</p>
+        </div>
+        <span tuiBadge size="m" [attr.data-occupied]="table.occupied">
+          {{ table.occupied ? 'Занят' : 'Свободен' }}
+        </span>
+        <button tuiButton type="button" appearance="secondary" (click)="toggle(table)">
+          {{ table.occupied ? 'Освободить' : 'Посадить гостей' }}
+        </button>
+      </article>
+    }
+  </div>
+</section>

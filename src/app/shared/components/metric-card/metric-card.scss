@@ -1,0 +1,40 @@
+.metric {
+  display: grid;
+  min-height: 7rem;
+  align-content: space-between;
+  gap: 0.5rem;
+  border: 1px solid #dfe4ea;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #ffffff;
+}
+
+strong {
+  color: #17212f;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+small {
+  color: #667085;
+}
+
+[data-tone='primary'] {
+  background: #e8f2ff;
+  color: #1459a8;
+}
+
+[data-tone='success'] {
+  background: #e8f7ee;
+  color: #0f6b3d;
+}
+
+[data-tone='warning'] {
+  background: #fff4db;
+  color: #8a5a00;
+}
+
+[data-tone='neutral'] {
+  background: #eef1f5;
+  color: #475467;
+}
