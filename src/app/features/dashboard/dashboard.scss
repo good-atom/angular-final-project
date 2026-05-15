@@ -89,6 +89,14 @@ form,
   gap: 0.5rem;
 }
 
+.menu-grid button {
+  min-height: 3.5rem;
+  min-width: 0;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
 .order-card {
   position: relative;
   display: grid;
