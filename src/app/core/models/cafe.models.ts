@@ -21,12 +21,21 @@ export interface MenuCategory {
   name: string;
 }
 
+export interface NutritionFacts {
+  calories: number;
+  protein: number;
+  fat: number;
+  carbs: number;
+}
+
 export interface MenuItem {
   id: string;
   establishmentId: string;
   categoryId: string;
   name: string;
   price: number;
+  ingredients: string;
+  nutrition: NutritionFacts;
   active: boolean;
 }
 

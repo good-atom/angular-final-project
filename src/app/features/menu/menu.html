@@ -40,6 +40,42 @@
         <input type="number" min="1" formControlName="price" />
       </label>
 
+      <label class="field">
+        <span>Состав</span>
+        <textarea
+          rows="3"
+          formControlName="ingredients"
+          placeholder="Основные ингредиенты блюда"
+        ></textarea>
+        @if (form.controls.ingredients.touched && form.controls.ingredients.invalid) {
+          <small class="error-text">Минимум 8 символов</small>
+        }
+      </label>
+
+      <fieldset class="nutrition-fieldset">
+        <legend>КБЖУ на порцию</legend>
+
+        <label class="field">
+          <span>Ккал</span>
+          <input type="number" min="0" formControlName="calories" />
+        </label>
+
+        <label class="field">
+          <span>Белки</span>
+          <input type="number" min="0" formControlName="protein" />
+        </label>
+
+        <label class="field">
+          <span>Жиры</span>
+          <input type="number" min="0" formControlName="fat" />
+        </label>
+
+        <label class="field">
+          <span>Углеводы</span>
+          <input type="number" min="0" formControlName="carbs" />
+        </label>
+      </fieldset>
+
       <label class="check">
         <input type="checkbox" formControlName="active" />
         <span>Доступно для заказа</span>
@@ -54,23 +90,44 @@
     <section class="panel list" aria-label="Позиции меню">
       @for (item of store.currentMenuItems(); track item.id) {
         <article class="menu-item">
-          <div>
+          <div class="menu-main">
             <strong>{{ item.name }}</strong>
             <p>{{ categoryName(item.categoryId) }}</p>
+            <p class="ingredients">{{ item.ingredients }}</p>
+            <dl class="nutrition" [attr.aria-label]="'КБЖУ для ' + item.name">
+              <div>
+                <dt>Ккал</dt>
+                <dd>{{ item.nutrition.calories }}</dd>
+              </div>
+              <div>
+                <dt>Б</dt>
+                <dd>{{ item.nutrition.protein }}</dd>
+              </div>
+              <div>
+                <dt>Ж</dt>
+                <dd>{{ item.nutrition.fat }}</dd>
+              </div>
+              <div>
+                <dt>У</dt>
+                <dd>{{ item.nutrition.carbs }}</dd>
+              </div>
+            </dl>
           </div>
-          <span tuiBadge size="m">{{ money(item.price) }}</span>
-          <button tuiButton type="button" appearance="secondary" size="s" (click)="edit(item)">
-            Изменить
-          </button>
-          <button
-            tuiButton
-            type="button"
-            appearance="flat"
-            size="s"
-            (click)="store.deleteMenuItem(item.id)"
-          >
-            Удалить
-          </button>
+          <div class="menu-actions">
+            <span tuiBadge size="m">{{ money(item.price) }}</span>
+            <button tuiButton type="button" appearance="secondary" size="s" (click)="edit(item)">
+              Изменить
+            </button>
+            <button
+              tuiButton
+              type="button"
+              appearance="flat"
+              size="s"
+              (click)="store.deleteMenuItem(item.id)"
+            >
+              Удалить
+            </button>
+          </div>
         </article>
       } @empty {
         <p class="empty">Позиции не найдены</p>

@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 
 import { initialCafeSnapshot } from '../data/seed-data';
-import { CafeSnapshot, CafeTable, MenuItem, Order, OrderStatus } from '../models/cafe.models';
+import {
+  CafeSnapshot,
+  CafeTable,
+  MenuItem,
+  NutritionFacts,
+  Order,
+  OrderStatus,
+} from '../models/cafe.models';
 import { orderTotal } from './calculations';
 
 const DB_KEY = 'cafe-orders-db';
@@ -17,7 +24,9 @@ export class MockDatabaseService {
     }
 
     try {
-      return JSON.parse(value) as CafeSnapshot;
+      const snapshot = normalizeSnapshot(JSON.parse(value) as CafeSnapshot);
+      this.persist(snapshot);
+      return snapshot;
     } catch {
       this.persist(initialCafeSnapshot);
       return cloneSnapshot(initialCafeSnapshot);
@@ -130,4 +139,33 @@ export class MockDatabaseService {
 
 function cloneSnapshot(snapshot: CafeSnapshot): CafeSnapshot {
   return JSON.parse(JSON.stringify(snapshot)) as CafeSnapshot;
+}
+
+function normalizeSnapshot(snapshot: CafeSnapshot): CafeSnapshot {
+  const seedById = new Map(initialCafeSnapshot.menuItems.map((item) => [item.id, item]));
+
+  return {
+    ...snapshot,
+    menuItems: snapshot.menuItems.map((item) => {
+      const seed = seedById.get(item.id);
+
+      return {
+        ...item,
+        ingredients: item.ingredients || seed?.ingredients || 'Состав уточняется',
+        nutrition: normalizeNutrition(item.nutrition, seed?.nutrition),
+      };
+    }),
+  };
+}
+
+function normalizeNutrition(
+  nutrition: NutritionFacts | undefined,
+  fallback: NutritionFacts | undefined,
+): NutritionFacts {
+  return {
+    calories: nutrition?.calories ?? fallback?.calories ?? 0,
+    protein: nutrition?.protein ?? fallback?.protein ?? 0,
+    fat: nutrition?.fat ?? fallback?.fat ?? 0,
+    carbs: nutrition?.carbs ?? fallback?.carbs ?? 0,
+  };
 }

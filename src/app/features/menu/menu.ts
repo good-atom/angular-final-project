@@ -24,6 +24,11 @@ export class Menu {
     name: ['', [Validators.required, Validators.minLength(2)]],
     categoryId: ['main', Validators.required],
     price: [100, [Validators.required, Validators.min(1)]],
+    ingredients: ['', [Validators.required, Validators.minLength(8)]],
+    calories: [100, [Validators.required, Validators.min(0)]],
+    protein: [0, [Validators.required, Validators.min(0)]],
+    fat: [0, [Validators.required, Validators.min(0)]],
+    carbs: [0, [Validators.required, Validators.min(0)]],
     active: [true],
   });
 
@@ -33,6 +38,11 @@ export class Menu {
       name: item.name,
       categoryId: item.categoryId,
       price: item.price,
+      ingredients: item.ingredients,
+      calories: item.nutrition.calories,
+      protein: item.nutrition.protein,
+      fat: item.nutrition.fat,
+      carbs: item.nutrition.carbs,
       active: item.active,
     });
   }
@@ -49,17 +59,30 @@ export class Menu {
       return;
     }
 
+    const { calories, protein, fat, carbs, ...value } = this.form.getRawValue();
+
     await this.store.upsertMenuItem({
       id: this.editingId() ?? '',
       establishmentId,
-      ...this.form.getRawValue(),
+      ...value,
+      nutrition: { calories, protein, fat, carbs },
     });
     this.cancel();
   }
 
   protected cancel(): void {
     this.editingId.set(null);
-    this.form.reset({ name: '', categoryId: 'main', price: 100, active: true });
+    this.form.reset({
+      name: '',
+      categoryId: 'main',
+      price: 100,
+      ingredients: '',
+      calories: 100,
+      protein: 0,
+      fat: 0,
+      carbs: 0,
+      active: true,
+    });
   }
 
   protected categoryName(categoryId: string): string {

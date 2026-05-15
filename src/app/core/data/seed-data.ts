@@ -18,6 +18,8 @@ export const initialCafeSnapshot: CafeSnapshot = {
       categoryId: 'breakfast',
       name: 'Сырники',
       price: 390,
+      ingredients: 'Творог, яйцо, рисовая мука, ваниль, сметана, ягодный соус',
+      nutrition: { calories: 420, protein: 24, fat: 18, carbs: 42 },
       active: true,
     },
     {
@@ -26,6 +28,8 @@ export const initialCafeSnapshot: CafeSnapshot = {
       categoryId: 'main',
       name: 'Паста с томатами',
       price: 520,
+      ingredients: 'Паста, томаты, базилик, чеснок, пармезан, оливковое масло',
+      nutrition: { calories: 560, protein: 17, fat: 19, carbs: 78 },
       active: true,
     },
     {
@@ -34,6 +38,8 @@ export const initialCafeSnapshot: CafeSnapshot = {
       categoryId: 'main',
       name: 'Боул с курицей',
       price: 610,
+      ingredients: 'Куриное филе, рис, авокадо, огурец, морковь, кунжутный соус',
+      nutrition: { calories: 640, protein: 39, fat: 24, carbs: 63 },
       active: true,
     },
     {
@@ -42,6 +48,8 @@ export const initialCafeSnapshot: CafeSnapshot = {
       categoryId: 'drinks',
       name: 'Капучино',
       price: 240,
+      ingredients: 'Эспрессо, молоко 3.2%, молочная пена',
+      nutrition: { calories: 120, protein: 7, fat: 6, carbs: 10 },
       active: true,
     },
     {
@@ -50,6 +58,8 @@ export const initialCafeSnapshot: CafeSnapshot = {
       categoryId: 'drinks',
       name: 'Домашний лимонад',
       price: 250,
+      ingredients: 'Лимон, апельсин, мята, сахарный сироп, газированная вода',
+      nutrition: { calories: 150, protein: 0, fat: 0, carbs: 36 },
       active: true,
     },
     {
@@ -58,6 +68,8 @@ export const initialCafeSnapshot: CafeSnapshot = {
       categoryId: 'desserts',
       name: 'Чизкейк',
       price: 360,
+      ingredients: 'Сливочный сыр, песочная основа, сливки, сахар, ваниль',
+      nutrition: { calories: 470, protein: 9, fat: 31, carbs: 39 },
       active: true,
     },
     {
@@ -66,6 +78,8 @@ export const initialCafeSnapshot: CafeSnapshot = {
       categoryId: 'main',
       name: 'Сэндвич с индейкой',
       price: 430,
+      ingredients: 'Чиабатта, индейка, салат, томат, сыр, горчичный соус',
+      nutrition: { calories: 510, protein: 31, fat: 18, carbs: 55 },
       active: true,
     },
     {
@@ -74,6 +88,8 @@ export const initialCafeSnapshot: CafeSnapshot = {
       categoryId: 'drinks',
       name: 'Американо',
       price: 190,
+      ingredients: 'Эспрессо, горячая вода',
+      nutrition: { calories: 8, protein: 0, fat: 0, carbs: 1 },
       active: true,
     },
   ],
