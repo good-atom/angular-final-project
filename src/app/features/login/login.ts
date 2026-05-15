@@ -5,6 +5,7 @@ import { TuiButton, TuiLoader } from '@taiga-ui/core';
 
 import { AuthService } from '../../core/auth/auth.service';
 import { Establishment } from '../../core/models/cafe.models';
+import { ThemeService } from '../../core/theme/theme.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class Login implements OnInit {
   private readonly auth = inject(AuthService);
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
+  protected readonly theme = inject(ThemeService);
 
   protected readonly loading = signal(false);
   protected readonly error = signal<string | null>(null);

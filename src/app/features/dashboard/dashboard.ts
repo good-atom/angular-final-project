@@ -93,6 +93,13 @@ export class Dashboard {
     }[status];
   }
 
+  protected categoryName(categoryId: string): string {
+    return (
+      this.store.categories().find((category) => category.id === categoryId)?.name ??
+      'Без категории'
+    );
+  }
+
   protected itemSum(item: OrderItem): number {
     return item.price * item.quantity;
   }

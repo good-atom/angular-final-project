@@ -67,8 +67,10 @@
 
         <div class="menu-grid" aria-label="Позиции меню">
           @for (item of store.currentMenuItems(); track item.id) {
-            <button tuiButton type="button" appearance="secondary" (click)="addItem(item)">
-              {{ item.name }} · {{ money(item.price) }}
+            <button class="dish-button" type="button" (click)="addItem(item)">
+              <span class="dish-name">{{ item.name }}</span>
+              <span class="dish-category">{{ categoryName(item.categoryId) }}</span>
+              <strong>{{ money(item.price) }}</strong>
             </button>
           }
         </div>

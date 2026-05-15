@@ -14,9 +14,15 @@
       }
     </nav>
 
-    <button tuiButton type="button" appearance="secondary" size="s" (click)="auth.logout()">
-      Выйти
-    </button>
+    <div class="sidebar-actions">
+      <button tuiButton type="button" appearance="secondary" size="s" (click)="theme.toggle()">
+        {{ theme.theme() === 'dark' ? 'Светлая тема' : 'Темная тема' }}
+      </button>
+
+      <button tuiButton type="button" appearance="secondary" size="s" (click)="auth.logout()">
+        Выйти
+      </button>
+    </div>
   </aside>
 
   <main class="content">

@@ -4,6 +4,7 @@ import { TuiButton } from '@taiga-ui/core';
 
 import { AuthService } from '../../core/auth/auth.service';
 import { CafeStore } from '../../core/state/cafe.store';
+import { ThemeService } from '../../core/theme/theme.service';
 
 @Component({
   selector: 'app-shell',
@@ -15,6 +16,7 @@ import { CafeStore } from '../../core/state/cafe.store';
 export class Shell implements OnInit {
   protected readonly store = inject(CafeStore);
   protected readonly auth = inject(AuthService);
+  protected readonly theme = inject(ThemeService);
 
   protected readonly links = [
     { path: '/dashboard', label: 'Заказы', marker: '01' },

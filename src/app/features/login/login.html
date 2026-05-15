@@ -1,5 +1,16 @@
 <main class="login-page">
   <section class="login-panel" aria-labelledby="login-title">
+    <button
+      class="theme-toggle"
+      tuiButton
+      type="button"
+      appearance="secondary"
+      size="s"
+      (click)="theme.toggle()"
+    >
+      {{ theme.theme() === 'dark' ? 'Светлая тема' : 'Темная тема' }}
+    </button>
+
     <div class="login-copy">
       <p class="eyebrow">Cafe Orders</p>
       <h1 id="login-title">Вход в смену</h1>

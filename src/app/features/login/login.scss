@@ -10,13 +10,15 @@
 }
 
 .login-panel {
+  position: relative;
   display: grid;
   width: min(100%, 28rem);
   gap: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.62);
   border-radius: 8px;
   padding: 1.35rem;
-  background: rgba(255, 253, 248, 0.96);
+  background: color-mix(in srgb, var(--surface-strong) 94%, transparent);
+  color: var(--ink);
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.3);
   backdrop-filter: blur(14px);
 }
@@ -39,7 +41,7 @@ h1 {
 
 .lead {
   margin: 0.75rem 0 0;
-  color: #4f5f6e;
+  color: var(--muted);
 }
 
 form {
@@ -58,11 +60,11 @@ form {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 0.75rem;
-  background: #fff8ec;
+  background: var(--surface-soft);
 }
 
 dt {
-  color: #7a5a32;
+  color: var(--accent);
   font-size: 0.78rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -72,6 +74,10 @@ dd {
   margin: 0.2rem 0 0;
   color: var(--ink);
   font-weight: 800;
+}
+
+.theme-toggle {
+  justify-self: end;
 }
 
 @media (max-width: 520px) {
