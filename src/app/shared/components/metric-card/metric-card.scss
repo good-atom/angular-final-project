@@ -3,38 +3,43 @@
   min-height: 7rem;
   align-content: space-between;
   gap: 0.5rem;
-  border: 1px solid #dfe4ea;
+  border: 1px solid var(--line);
   border-radius: 8px;
   padding: 1rem;
-  background: #ffffff;
+  background: var(--surface-strong);
+  box-shadow: 0 12px 30px rgba(24, 33, 47, 0.06);
 }
 
 strong {
-  color: #17212f;
+  color: var(--ink);
   font-size: 1.8rem;
   line-height: 1;
 }
 
 small {
-  color: #667085;
+  color: var(--muted);
 }
 
 [data-tone='primary'] {
-  background: #e8f2ff;
-  color: #1459a8;
+  border-color: #bfd8cb;
+  background: #eff8f3;
+  color: #176a4d;
 }
 
 [data-tone='success'] {
-  background: #e8f7ee;
-  color: #0f6b3d;
+  border-color: #bddfc8;
+  background: #eaf7ed;
+  color: #176a4d;
 }
 
 [data-tone='warning'] {
-  background: #fff4db;
+  border-color: #ead19d;
+  background: #fff6de;
   color: #8a5a00;
 }
 
 [data-tone='neutral'] {
-  background: #eef1f5;
+  border-color: #d9d2c4;
+  background: #f7f3ea;
   color: #475467;
 }

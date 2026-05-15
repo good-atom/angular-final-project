@@ -1,9 +1,9 @@
 <main class="login-page">
   <section class="login-panel" aria-labelledby="login-title">
-    <div>
+    <div class="login-copy">
       <p class="eyebrow">Cafe Orders</p>
       <h1 id="login-title">Вход в смену</h1>
-      <p class="lead">Авторизация разделяет данные между заведениями и открывает рабочую панель.</p>
+      <p class="lead">Рабочее место кассира для заказов, столов, меню и итогов дня.</p>
     </div>
 
     <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
@@ -41,5 +41,16 @@
         }
       </button>
     </form>
+
+    <dl class="demo-access" aria-label="Демо-доступ">
+      <div>
+        <dt>Логин</dt>
+        <dd>admin@cafe.local</dd>
+      </div>
+      <div>
+        <dt>Пароль</dt>
+        <dd>demo1234</dd>
+      </div>
+    </dl>
   </section>
 </main>

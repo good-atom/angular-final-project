@@ -1,15 +1,16 @@
 .status-control {
   display: grid;
   gap: 0.35rem;
-  color: #536070;
+  color: #4f5f6e;
   font-size: 0.85rem;
   font-weight: 700;
 }
 
 select {
   min-height: 2.35rem;
-  border: 1px solid #d7dde5;
+  border: 1px solid var(--line);
   border-radius: 8px;
   padding: 0.4rem 0.7rem;
-  background: #ffffff;
+  background: var(--surface-strong);
+  color: var(--ink);
 }

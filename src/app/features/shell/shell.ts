@@ -17,10 +17,10 @@ export class Shell implements OnInit {
   protected readonly auth = inject(AuthService);
 
   protected readonly links = [
-    { path: '/dashboard', label: 'Заказы' },
-    { path: '/menu', label: 'Меню' },
-    { path: '/tables', label: 'Столы' },
-    { path: '/history', label: 'История' },
+    { path: '/dashboard', label: 'Заказы', marker: '01' },
+    { path: '/menu', label: 'Меню', marker: '02' },
+    { path: '/tables', label: 'Столы', marker: '03' },
+    { path: '/history', label: 'История', marker: '04' },
   ];
 
   ngOnInit(): void {
